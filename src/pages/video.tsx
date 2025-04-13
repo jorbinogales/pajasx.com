@@ -18,7 +18,7 @@ const VideoPage: React.FC = () => {
 
 	const SKELETONS_LOADERS = new Array(12)
 		.fill(null)
-		.map((_, i) => <CSkeletonLoader />);
+		.map((_,) => <CSkeletonLoader />);
 
 	React.useEffect(() => {
 		if (results) {

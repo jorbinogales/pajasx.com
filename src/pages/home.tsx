@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { CVideo } from '../components/video';
 import { Link } from 'react-router-dom';
 import { CSkeletonLoader } from '../components/skeleton';
@@ -17,7 +17,7 @@ const Home: React.FC = () => {
 
 	const SKELETONS_LOADERS = new Array(12)
 		.fill(null)
-		.map((_, i) => <CSkeletonLoader />);
+		.map((_,) => <CSkeletonLoader />);
 
 	React.useEffect(() => {
 		if (results) {
