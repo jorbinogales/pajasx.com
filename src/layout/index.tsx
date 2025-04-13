@@ -9,7 +9,7 @@ const Layout: React.FC<any> = ({ children }) => {
   useEffect(() => {
     const isConfirmed = localStorage.getItem('isAdultConfirmed');
     if (!isConfirmed) {
-      setIsAgeModalOpen(true); // Solo muestra si no está confirmado
+      setIsAgeModalOpen(true); 
     }
   }, []);
 
@@ -41,6 +41,7 @@ const Layout: React.FC<any> = ({ children }) => {
 					property="og:image"
 					content="https://www.pajasx.com/og-image.jpg"
 				/>
+        <meta name="google-adsense-account" content="ca-pub-9301893608040741"></meta>
 			</Helmet>
 			<div className="flex flex-col min-h-screen bg-stone-900">
 				{/* Navbar fijo */}
