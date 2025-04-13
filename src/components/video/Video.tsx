@@ -12,7 +12,7 @@ const CVideo: React.FC<{ video: IVideo }> = ({ video }) => {
 	return (
 		<div className="overflow-hidden hover:scale-105 transition-transform cursor-pointer">
 			<img
-				src={imageError ? NotFound : NotFound}
+				src={imageError ? NotFound : video.thumbnail_url}
 				alt={`Video de pajasx  - ${video.name}`}
 				loading="lazy"
 				className="w-full h-40 object-cover"
