@@ -6,12 +6,12 @@ import { CAgeConfirmation } from '../components/ageConfirmation.tsx';
 const Layout: React.FC<any> = ({ children }) => {
 	const [isAgeModalOpen, setIsAgeModalOpen] = useState(false);
 
-  useEffect(() => {
-    const isConfirmed = localStorage.getItem('isAdultConfirmed');
-    if (!isConfirmed) {
-      setIsAgeModalOpen(true); 
-    }
-  }, []);
+	useEffect(() => {
+		const isConfirmed = localStorage.getItem('isAdultConfirmed');
+		if (!isConfirmed) {
+			setIsAgeModalOpen(true);
+		}
+	}, []);
 
 	const closeModal = () => {
 		setIsAgeModalOpen(false);
@@ -41,7 +41,7 @@ const Layout: React.FC<any> = ({ children }) => {
 					property="og:image"
 					content="https://www.pajasx.com/og-image.jpg"
 				/>
-        <meta name="google-adsense-account" content="ca-pub-9301893608040741"></meta>
+				<meta name="google-adsense-account" content="ca-pub-9301893608040741" />
 			</Helmet>
 			<div className="flex flex-col min-h-screen bg-stone-900">
 				{/* Navbar fijo */}
