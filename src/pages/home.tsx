@@ -107,8 +107,8 @@ const Home: React.FC = () => {
 				<CPagination totalPages={99999} pageNumber={page}></CPagination>
 			</div>
 			<div
-				className="juicy-ad-container"
-				style={{ textAlign: 'center', margin: '20px 0' }}
+				className="juicy-ad-container justify-center"
+				style={{ textAlign: 'center', margin: 'auto', maxWidth: '468px' }}
 			>
 				<ins id="1088204" data-width="468" data-height="60"></ins>
 			</div>
