@@ -25,6 +25,28 @@ const Home: React.FC = () => {
 		}
 	}, [results]);
 
+	React.useEffect(() => {
+		const script = document.createElement('script');
+		script.type = 'text/javascript';
+		script.src = 'https://poweredby.jads.co/js/jads.js';
+		script.async = true;
+		script.setAttribute('data-cfasync', 'false');
+		document.body.appendChild(script);
+
+		const adScript = document.createElement('script');
+		adScript.type = 'text/javascript';
+		adScript.setAttribute('data-cfasync', 'false');
+		adScript.async = true;
+		adScript.innerHTML =
+			"(adsbyjuicy = window.adsbyjuicy || []).push({'adzone':1088204});";
+		document.body.appendChild(adScript);
+
+		return () => {
+			document.body.removeChild(script);
+			document.body.removeChild(adScript);
+		};
+	}, []);
+
 	return (
 		<>
 			<Helmet>
@@ -49,7 +71,10 @@ const Home: React.FC = () => {
 					property="og:image"
 					content="https://www.pajasx.com/og-image.jpg"
 				/>
-				<meta name="juicyads-site-verification" content="28cd7ccf22cf0e282316ae57d22bd233"/>
+				<meta
+					name="juicyads-site-verification"
+					content="28cd7ccf22cf0e282316ae57d22bd233"
+				/>
 			</Helmet>
 			{page > 1 ? (
 				<div className="gap-5 p-5 mx-auto">
@@ -80,6 +105,12 @@ const Home: React.FC = () => {
 			</div>
 			<div className="gap-5 p-5 mx-auto">
 				<CPagination totalPages={99999} pageNumber={page}></CPagination>
+			</div>
+			<div
+				className="juicy-ad-container"
+				style={{ textAlign: 'center', margin: '20px 0' }}
+			>
+				<ins id="1088204" data-width="468" data-height="60"></ins>
 			</div>
 		</>
 	);
