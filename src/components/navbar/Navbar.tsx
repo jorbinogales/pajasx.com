@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useVideo } from '../../context/videoContext';
 import Logo from './../../assets/logo.png';
 
 const CNavbar: React.FC = () => {

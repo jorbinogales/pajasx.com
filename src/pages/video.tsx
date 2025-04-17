@@ -1,5 +1,5 @@
 // Video.tsx
-import React, { act, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, Link, useLocation } from 'react-router-dom';
 import { IVideo } from '../interface/video';
 import { useVideo } from '../context/videoContext';
