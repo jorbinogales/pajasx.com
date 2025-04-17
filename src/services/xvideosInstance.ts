@@ -4,7 +4,7 @@ import axios, {
 	AxiosHeaders,
 } from 'axios';
 
-const xvideosApiUrl = 'https://api.adultdatalink.com/xvideos';
+const xvideosApiUrl = import.meta.env.VITE_API_URL;
 
 const xvideosInstance = axios.create({
 	baseURL: xvideosApiUrl,

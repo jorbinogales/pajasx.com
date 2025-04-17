@@ -11,13 +11,13 @@ import Layout from './layout';
 
 function App() {
 	return (
-    
 		<Router>
 			<Layout>
 				<Routes>
+					<Route path="/page/:search/:pagenumber" element={<Home />} />
 					<Route path="/page/:pagenumber" element={<Home />} />
-					<Route path="/" element={<Navigate to="/page/1" />} />
-					<Route path="/video/:name" element={<Video />} />
+					<Route path="/" element={<Home />} />
+					<Route path="/video/:slug" element={<Video />} />
 				</Routes>
 			</Layout>
 		</Router>

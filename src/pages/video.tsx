@@ -1,20 +1,38 @@
 // Video.tsx
-import React, { useEffect, useState } from 'react';
+import React, { act, useEffect, useState } from 'react';
 import { useParams, useNavigate, Link, useLocation } from 'react-router-dom';
 import { IVideo } from '../interface/video';
 import { useVideo } from '../context/videoContext';
 import { CSkeletonLoader } from '../components/skeleton';
 import { CVideo } from '../components/video';
+import { IResults } from '../interface/results';
 
 const VideoPage: React.FC = () => {
-	const { name } = useParams<{ name: string }>();
+	const { slug } = useParams<{ slug: string }>();
+
 	const navigate = useNavigate();
 	const location = useLocation();
-	const state = location.state as { video?: IVideo };
-	const video = state?.video;
+	const [video, setVideo] = useState<IVideo>();
+	const [videoList, setVideoList] = useState<IResults>();
 
-	const [videos, setVideos] = useState<IVideo[]>([]);
-	const { results, loading } = useVideo(1, video?.name);
+	const { actualVideo } = useVideo({
+		slug: slug,
+	});
+	const { results, loading } = useVideo({
+		title: actualVideo?.name,
+	});
+
+	React.useEffect(() => {
+		if (actualVideo) {
+			setVideo(actualVideo);
+		}
+	}, [actualVideo]);
+
+	React.useEffect(() => {
+		if (results) {
+			setVideoList(results);
+		}
+	}, [results]);
 
 	const loadJuicyAd = (adzone: number) => {
 		if (typeof (window as any).adsbyjuicy === 'undefined') {
@@ -48,17 +66,11 @@ const VideoPage: React.FC = () => {
 		.fill(null)
 		.map((_) => <CSkeletonLoader />);
 
-	React.useEffect(() => {
-		if (results) {
-			setVideos(results);
-		}
-	}, [results]);
-
 	useEffect(() => {
 		window.scrollTo(0, 0);
 	}, [location]);
 
-	if (!name || !video) {
+	if (!actualVideo) {
 		return (
 			<div className="text-center mt-10 text-gray-600">
 				<p>Video no encontrado.</p>
@@ -77,12 +89,12 @@ const VideoPage: React.FC = () => {
 			>
 				{/* Video - ocupa 3/4 en pantallas grandes */}
 				<div className="xl:col-span-10">
-					<h2 className="text-2xl font-bold mb-4 text-white">{video.name}</h2>
+					<h2 className="text-2xl font-bold mb-4 text-white">{video?.name}</h2>
 					<iframe
-						src={decodeURIComponent(video.embed_url)}
-						className="w-full h-[70vh] rounded-lg shadow-md"
+						src={decodeURIComponent(video?.embedUrl ?? '')}
+						className="w-full h-[50vh] md:h-[70vh] rounded-lg shadow-md"
 						allowFullScreen
-					></iframe>
+					/>
 				</div>
 
 				{/* Anuncios - ocupa 1/4 */}
@@ -108,15 +120,11 @@ const VideoPage: React.FC = () => {
 				<div className="grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-1 m-3 mx-auto">
 					{loading
 						? SKELETONS_LOADERS
-						: videos.length === 0
+						: videoList?.videos.length === 0
 						? SKELETONS_LOADERS
-						: videos.map((video, index) => (
+						: videoList?.videos.map((video, index) => (
 								<div key={index} className="cursor-pointer">
-									{/* Usamos el embed_url como parte de la URL */}
-									<Link
-										to={`/video/${video.name.replace(/ /g, '_')}`}
-										state={{ video }}
-									>
+									<Link reloadDocument to={`/video/${video.slug}`}>
 										<CVideo video={video} />
 									</Link>
 								</div>

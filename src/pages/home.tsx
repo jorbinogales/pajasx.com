@@ -2,18 +2,22 @@ import React, { useState } from 'react';
 import { CVideo } from '../components/video';
 import { Link } from 'react-router-dom';
 import { CSkeletonLoader } from '../components/skeleton';
-import { IVideo } from '../interface/video';
 import { useVideo } from '../context/videoContext';
 import { CPagination } from '../components/pagination';
 import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+import { IResults } from '../interface/results';
 
 const Home: React.FC = () => {
+	const { search } = useParams();
 	const { pagenumber } = useParams();
 	const page = Number(pagenumber || 1);
 
-	const [videos, setVideos] = useState<IVideo[]>([]);
-	const { results, loading } = useVideo(page);
+	const [response, setResponse] = useState<IResults>();
+	const { results, loading } = useVideo({
+		page: page,
+		title: search,
+	});
 
 	const SKELETONS_LOADERS = new Array(12)
 		.fill(null)
@@ -21,7 +25,7 @@ const Home: React.FC = () => {
 
 	React.useEffect(() => {
 		if (results) {
-			setVideos(results);
+			setResponse(results);
 		}
 	}, [results]);
 
@@ -76,9 +80,13 @@ const Home: React.FC = () => {
 					content="28cd7ccf22cf0e282316ae57d22bd233"
 				/>
 			</Helmet>
-			{page > 1 ? (
+			{page > 1 || search ? (
 				<div className="gap-5 p-5 mx-auto">
-					<CPagination totalPages={99999} pageNumber={page}></CPagination>
+					<CPagination
+						totalPages={response?.totalPages ? response.totalPages : 1}
+						pageNumber={response?.currentPage ? response.currentPage : 1}
+						search={search}
+					></CPagination>
 				</div>
 			) : (
 				<></>
@@ -89,22 +97,23 @@ const Home: React.FC = () => {
 			>
 				{loading
 					? SKELETONS_LOADERS
-					: videos.length === 0
+					: response?.videos.length === 0
 					? SKELETONS_LOADERS
-					: videos.map((video, index) => (
+					: response?.videos.map((video, index) => (
 							<div key={index} className="cursor-pointer">
 								{/* Usamos el embed_url como parte de la URL */}
-								<Link
-									to={`/video/${video.name.replace(/ /g, '_')}`}
-									state={{ video }}
-								>
+								<Link to={`/video/${video.slug}`}>
 									<CVideo video={video} />
 								</Link>
 							</div>
 					  ))}
 			</div>
 			<div className="gap-5 p-5 mx-auto">
-				<CPagination totalPages={99999} pageNumber={page}></CPagination>
+				<CPagination
+					totalPages={response?.totalPages ? response.totalPages : 1}
+					pageNumber={response?.currentPage ? response.currentPage : 1}
+					search={search}
+				></CPagination>
 			</div>
 			<div
 				className="juicy-ad-container justify-center"

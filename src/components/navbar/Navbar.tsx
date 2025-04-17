@@ -4,14 +4,14 @@ import Logo from './../../assets/logo.png';
 
 const CNavbar: React.FC = () => {
 	const [searchQuery, setSearchQuery] = useState('');
-	const { search } = useVideo();
+
 	const handleSearchSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
-		search(searchQuery);
+		window.location.href = `/page/${searchQuery}/1`;
 	};
 
-	const handlePageClick = (pageNumber: number) => {
-		window.location.href = `/page/${pageNumber}`;
+	const handlePageClick = () => {
+		window.location.href = `/`;
 	};
 
 	return (
@@ -21,7 +21,7 @@ const CNavbar: React.FC = () => {
 				style={{ maxWidth: '1800px' }}
 			>
 				<h1
-					onClick={() => handlePageClick(1 as number)}
+					onClick={() => handlePageClick()}
 					className="flex items-center space-x-3 rtl:space-x-reverse cursor-pointer"
 				>
 					<img src={Logo} className="h-8" alt="pajasx Logo" />
