@@ -7,6 +7,8 @@ import { CPagination } from '../components/pagination';
 import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { IResults } from '../interface/results';
+import CAdMobile from '../components/juicyAd/adMobile';
+import CAdBanner from '../components/juicyAd/adBanner';
 
 const Home: React.FC = () => {
 	const { search } = useParams();
@@ -28,28 +30,6 @@ const Home: React.FC = () => {
 			setResponse(results);
 		}
 	}, [results]);
-
-	React.useEffect(() => {
-		const script = document.createElement('script');
-		script.type = 'text/javascript';
-		script.src = 'https://poweredby.jads.co/js/jads.js';
-		script.async = true;
-		script.setAttribute('data-cfasync', 'false');
-		document.body.appendChild(script);
-
-		const adScript = document.createElement('script');
-		adScript.type = 'text/javascript';
-		adScript.setAttribute('data-cfasync', 'false');
-		adScript.async = true;
-		adScript.innerHTML =
-			"(adsbyjuicy = window.adsbyjuicy || []).push({'adzone':1088204});";
-		document.body.appendChild(adScript);
-
-		return () => {
-			document.body.removeChild(script);
-			document.body.removeChild(adScript);
-		};
-	}, []);
 
 	return (
 		<>
@@ -80,6 +60,12 @@ const Home: React.FC = () => {
 					content="28cd7ccf22cf0e282316ae57d22bd233"
 				/>
 			</Helmet>
+			<div className="hidden md:block">
+				<CAdBanner />
+			</div>
+			<div className="block md:hidden">
+				<CAdMobile />
+			</div>
 			{page > 1 || search ? (
 				<div className="gap-5 p-5 mx-auto">
 					<CPagination
@@ -102,7 +88,7 @@ const Home: React.FC = () => {
 					: response?.videos.map((video, index) => (
 							<div key={index} className="cursor-pointer">
 								{/* Usamos el embed_url como parte de la URL */}
-								<Link to={`/video/${video.slug}`}>
+								<Link to={`/${video.slug}`}>
 									<CVideo video={video} />
 								</Link>
 							</div>
@@ -115,11 +101,11 @@ const Home: React.FC = () => {
 					search={search}
 				></CPagination>
 			</div>
-			<div
-				className="juicy-ad-container justify-center"
-				style={{ textAlign: 'center', margin: 'auto', maxWidth: '468px' }}
-			>
-				<ins id="1088204" data-width="468" data-height="60"></ins>
+			<div className="hidden md:block">
+				<CAdBanner />
+			</div>
+			<div className="block md:hidden">
+				<CAdMobile />
 			</div>
 		</>
 	);

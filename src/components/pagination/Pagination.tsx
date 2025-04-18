@@ -56,13 +56,22 @@ const CPagination: React.FC<PaginationProps> = ({
 	return (
 		<nav className="flex justify-center mt-4">
 			<ul className="flex items-center -space-x-px h-10 text-base">
-				{generatePages().map((page, index) =>
-					page === '...' ? (
-						<li key={index}>
+				{generatePages().map((page, index) => {
+					const isHiddenOnMobile =
+						page === 1 || page === '...' || page === totalPages;
+
+					return page === '...' ? (
+						<li
+							key={index}
+							className={`${isHiddenOnMobile ? 'hidden md:block' : ''}`}
+						>
 							<span className="px-4 text-gray-500">...</span>
 						</li>
 					) : (
-						<li key={index}>
+						<li
+							key={index}
+							className={`${isHiddenOnMobile ? 'hidden md:block' : ''}`}
+						>
 							<button
 								onClick={() => handlePageClick(page as number)}
 								className={`flex items-center justify-center px-4 h-10 m-2 cursor-pointer ${
@@ -74,8 +83,8 @@ const CPagination: React.FC<PaginationProps> = ({
 								{page}
 							</button>
 						</li>
-					)
-				)}
+					);
+				})}
 			</ul>
 		</nav>
 	);

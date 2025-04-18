@@ -24,11 +24,11 @@ const CNavbar: React.FC = () => {
 					className="flex items-center space-x-3 rtl:space-x-reverse cursor-pointer"
 				>
 					<img src={Logo} className="h-8" alt="pajasx Logo" />
-					<span className="self-center text-3xl font-semibold whitespace-nowrap dark:text-white font-extrabold ">
+					<span className="hidden md:block self-center text-3xl font-semibold whitespace-nowrap dark:text-white font-extrabold ">
 						Pajas<span className="dark:text-yellow-600">X</span>
 					</span>
 				</h1>
-				<div className="flex md:order-2">
+				<div className="flex md:order-2  w-1/2 md:w-auto">
 					<div className="relative block">
 						<div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
 							<svg

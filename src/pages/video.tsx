@@ -6,6 +6,8 @@ import { useVideo } from '../context/videoContext';
 import { CSkeletonLoader } from '../components/skeleton';
 import { CVideo } from '../components/video';
 import { IResults } from '../interface/results';
+import CAdBanner from '../components/juicyAd/adBanner';
+import CAdMobile from '../components/juicyAd/adMobile';
 
 const VideoPage: React.FC = () => {
 	const { slug } = useParams<{ slug: string }>();
@@ -34,34 +36,6 @@ const VideoPage: React.FC = () => {
 		}
 	}, [results]);
 
-	const loadJuicyAd = (adzone: number) => {
-		if (typeof (window as any).adsbyjuicy === 'undefined') {
-			(window as any).adsbyjuicy = [];
-		}
-
-		(window as any).adsbyjuicy.push({ adzone });
-	};
-
-	React.useEffect(() => {
-		const script = document.createElement('script');
-		script.type = 'text/javascript';
-		script.async = true;
-		script.setAttribute('data-cfasync', 'false');
-		script.src = 'https://poweredby.jads.co/js/jads.js';
-
-		script.onload = () => {
-			loadJuicyAd(1088204);
-			loadJuicyAd(1088207);
-			loadJuicyAd(1088209);
-		};
-
-		document.body.appendChild(script);
-
-		return () => {
-			document.body.removeChild(script);
-		};
-	}, []);
-
 	const SKELETONS_LOADERS = new Array(12)
 		.fill(null)
 		.map((_) => <CSkeletonLoader />);
@@ -83,13 +57,22 @@ const VideoPage: React.FC = () => {
 
 	return (
 		<>
+			<div style={{ transform: 'scale(0.4)' }}>
+				<CAdBanner />
+			</div>
 			<div
 				className="grid grid-cols-1 xl:grid-cols-12 gap-6 p-4 mx-auto"
 				style={{ maxWidth: '1800px' }}
 			>
 				{/* Video - ocupa 3/4 en pantallas grandes */}
 				<div className="xl:col-span-10">
-					<h2 className="text-2xl font-bold mb-4 text-white">{video?.name}</h2>
+					<h2 className="text-xl font-bold mb-4 text-white">{video?.name}</h2>
+					<p className="text-xs text-white mt-2">
+						{video?.views} Views |
+						<span className="m-2 bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-yellow-900 dark:text-yellow-300">
+							{video?.time}
+						</span>
+					</p>
 					<iframe
 						src={decodeURIComponent(video?.embedUrl ?? '')}
 						className="w-full h-[50vh] md:h-[70vh] rounded-lg shadow-md"
@@ -98,23 +81,17 @@ const VideoPage: React.FC = () => {
 				</div>
 
 				{/* Anuncios - ocupa 1/4 */}
-				<div className="xl:col-span-2">
+				<div className="hidden xl:block xl:col-span-2">
 					<h2 className="text-2xl font-bold mb-4 text-white">Anuncios</h2>
-
-					<div className="flex flex-col xl:flex-col gap-4 items-center">
-						<ins id="1088207" data-width="250" data-height="250"></ins>
-						<ins id="1088209" data-width="250" data-height="250"></ins>
-					</div>
+					<CAdMobile />
+					<CAdMobile />
 				</div>
 			</div>
-			<div
-				className="juicy-ad-container justify-center"
-				style={{ textAlign: 'center', margin: 'auto', maxWidth: '468px' }}
-			>
-				<ins id="1088204" data-width="468" data-height="60"></ins>
-			</div>
 			<div className="mx-auto gap-1 p-5" style={{ maxWidth: '1800px' }}>
-				<p className="text-xl text-gray-900 dark:text-white">
+				<div style={{ transform: 'scale(0.4)' }}>
+					<CAdBanner />
+				</div>
+				<p className="text-xl text-gray-900 dark:text-white font-bold">
 					Videos relacionados
 				</p>
 				<div className="grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-1 m-3 mx-auto">
@@ -124,7 +101,7 @@ const VideoPage: React.FC = () => {
 						? SKELETONS_LOADERS
 						: videoList?.videos.map((video, index) => (
 								<div key={index} className="cursor-pointer">
-									<Link reloadDocument to={`/video/${video.slug}`}>
+									<Link reloadDocument to={`/${video.slug}`}>
 										<CVideo video={video} />
 									</Link>
 								</div>

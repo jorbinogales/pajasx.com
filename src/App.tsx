@@ -12,7 +12,7 @@ function App() {
 					<Route path="/page/:search/:pagenumber" element={<Home />} />
 					<Route path="/page/:pagenumber" element={<Home />} />
 					<Route path="/" element={<Home />} />
-					<Route path="/video/:slug" element={<Video />} />
+					<Route path="/:slug" element={<Video />} />
 				</Routes>
 			</Layout>
 		</Router>
