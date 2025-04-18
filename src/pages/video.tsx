@@ -88,7 +88,7 @@ const VideoPage: React.FC = () => {
 				</div>
 			</div>
 			<div className="mx-auto gap-1 p-5" style={{ maxWidth: '1800px' }}>
-				<div style={{ transform: 'scale(0.4)' }}>
+				<div style={{ transform: 'scale(0.7)' }}>
 					<CAdBanner />
 				</div>
 				<p className="text-xl text-gray-900 dark:text-white font-bold">
