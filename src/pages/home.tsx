@@ -7,7 +7,6 @@ import { CPagination } from '../components/pagination';
 import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { IResults } from '../interface/results';
-import CAdMobile from '../components/juicyAd/adMobile';
 import CAdBanner from '../components/juicyAd/adBanner';
 
 const Home: React.FC = () => {
