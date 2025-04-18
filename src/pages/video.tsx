@@ -84,7 +84,7 @@ const VideoPage: React.FC = () => {
 					</p>
 					<iframe
 						src={decodeURIComponent(video?.embedUrl ?? '')}
-						className="w-full h-[50vh] md:h-[70vh] rounded-lg shadow-md"
+						className="w-full h-[30vh] md:h-[70vh] rounded-lg shadow-md"
 						allowFullScreen
 					/>
 				</div>
