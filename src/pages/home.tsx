@@ -60,11 +60,11 @@ const Home: React.FC = () => {
 					content="28cd7ccf22cf0e282316ae57d22bd233"
 				/>
 			</Helmet>
-			<div className="hidden md:block">
+			<div className="block md:hidden" style={{ transform: 'scale(0.7)' }}>
 				<CAdBanner />
 			</div>
-			<div className="block md:hidden">
-				<CAdMobile />
+			<div className="hidden md:block">
+				<CAdBanner />
 			</div>
 			{page > 1 || search ? (
 				<div className="gap-5 p-5 mx-auto">
@@ -101,11 +101,11 @@ const Home: React.FC = () => {
 					search={search}
 				></CPagination>
 			</div>
-			<div className="hidden md:block">
+			<div className="block md:hidden" style={{ transform: 'scale(0.7)' }}>
 				<CAdBanner />
 			</div>
-			<div className="block md:hidden">
-				<CAdMobile />
+			<div className="hidden md:block">
+				<CAdBanner />
 			</div>
 		</>
 	);

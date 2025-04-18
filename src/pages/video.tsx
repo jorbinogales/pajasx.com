@@ -57,7 +57,7 @@ const VideoPage: React.FC = () => {
 
 	return (
 		<>
-			<div style={{ transform: 'scale(0.4)' }}>
+			<div style={{ transform: 'scale(0.7)' }}>
 				<CAdBanner />
 			</div>
 			<div
