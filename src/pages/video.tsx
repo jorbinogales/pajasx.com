@@ -8,6 +8,7 @@ import { CVideo } from '../components/video';
 import { IResults } from '../interface/results';
 import CAdBanner from '../components/juicyAd/adBanner';
 import CAdMobile from '../components/juicyAd/adMobile';
+import { Helmet } from 'react-helmet';
 
 const VideoPage: React.FC = () => {
 	const { slug } = useParams<{ slug: string }>();
@@ -57,6 +58,14 @@ const VideoPage: React.FC = () => {
 
 	return (
 		<>
+			<Helmet>
+				<title>{video?.name} - Pajasx</title>
+				<meta name="description" content={video?.name} />
+				<meta property="og:title" content={video?.name} />
+				<meta property="og:description" content={video?.name} />
+				<meta property="og:image" content={video?.thumbnailUrl} />
+				<meta property="og:type" content="video" />
+			</Helmet>
 			<div style={{ transform: 'scale(0.7)' }}>
 				<CAdBanner />
 			</div>
