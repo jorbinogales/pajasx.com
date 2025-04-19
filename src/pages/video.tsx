@@ -6,9 +6,8 @@ import { useVideo } from '../context/videoContext';
 import { CSkeletonLoader } from '../components/skeleton';
 import { CVideo } from '../components/video';
 import { IResults } from '../interface/results';
-import CAdBanner from '../components/juicyAd/adBanner';
-import CAdMobile from '../components/juicyAd/adMobile';
 import { Helmet } from 'react-helmet';
+import CAd from '../components/ad/CAd';
 
 const VideoPage: React.FC = () => {
 	const { slug } = useParams<{ slug: string }>();
@@ -58,17 +57,16 @@ const VideoPage: React.FC = () => {
 
 	return (
 		<>
-			<Helmet>
-				<title>{video?.name} - Pajasx</title>
-				<meta name="description" content={video?.name} />
-				<meta property="og:title" content={video?.name} />
-				<meta property="og:description" content={video?.name} />
-				<meta property="og:image" content={video?.thumbnailUrl} />
-				<meta property="og:type" content="video" />
-			</Helmet>
-			<div style={{ transform: 'scale(0.7)' }}>
-				<CAdBanner />
-			</div>
+			{video?.name && (
+				<Helmet>
+					<title>{video.name} - Pajasx</title>
+					<meta name="description" content={video.name} />
+					<meta property="og:title" content={video.name} />
+					<meta property="og:description" content={video.name} />
+					<meta property="og:image" content={video.thumbnailUrl} />
+					<meta property="og:type" content="video" />
+				</Helmet>
+			)}
 			<div
 				className="grid grid-cols-1 xl:grid-cols-12 gap-6 p-4 mx-auto"
 				style={{ maxWidth: '1800px' }}
@@ -83,6 +81,7 @@ const VideoPage: React.FC = () => {
 						</span>
 					</p>
 					<iframe
+						style={{ marginTop: '35px' }}
 						src={decodeURIComponent(video?.embedUrl ?? '')}
 						className="w-full h-[30vh] md:h-[70vh] rounded-lg shadow-md"
 						allowFullScreen
@@ -92,14 +91,42 @@ const VideoPage: React.FC = () => {
 				{/* Anuncios - ocupa 1/4 */}
 				<div className="hidden xl:block xl:col-span-2">
 					<h2 className="text-2xl font-bold mb-4 text-white">Anuncios</h2>
-					<CAdMobile />
-					<CAdMobile />
+					<div
+						className="justify-center"
+						style={{ maxWidth: '300px', margin: 'auto', marginTop: '70px' }}
+					>
+						<CAd
+							width="300"
+							height="250"
+							src="//a.adtng.com/get/10002799?ata=jorbinogales001"
+							name="spot_id_10002799"
+						/>
+					</div>
+					<div
+						className="justify-center"
+						style={{ maxWidth: '300px', margin: 'auto', marginTop: '70px' }}
+					>
+						<CAd
+							width="300"
+							height="300"
+							src="//a.adtng.com/get/10002798?ata=jorbinogales001"
+							name="spot_id_10002798"
+						/>
+					</div>
 				</div>
 			</div>
+			<div
+				className="hidden md:block justify-center"
+				style={{ maxWidth: '900px', margin: 'auto', marginTop: '70px' }}
+			>
+				<CAd
+					width="900"
+					height="250"
+					src="//a.adtng.com/get/10002800?ata=jorbinogales001"
+					name="spot_id_10002800"
+				/>
+			</div>
 			<div className="mx-auto gap-1 p-5" style={{ maxWidth: '1800px' }}>
-				<div style={{ transform: 'scale(0.7)' }}>
-					<CAdBanner />
-				</div>
 				<p className="text-xl text-gray-900 dark:text-white font-bold">
 					Videos relacionados
 				</p>

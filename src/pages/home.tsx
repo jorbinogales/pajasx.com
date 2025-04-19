@@ -7,7 +7,7 @@ import { CPagination } from '../components/pagination';
 import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { IResults } from '../interface/results';
-import CAdBanner from '../components/juicyAd/adBanner';
+import CAd from '../components/ad/CAd';
 
 const Home: React.FC = () => {
 	const { search } = useParams();
@@ -58,17 +58,28 @@ const Home: React.FC = () => {
 					name="juicyads-site-verification"
 					content="28cd7ccf22cf0e282316ae57d22bd233"
 				/>
-				{/* Exo click  */}
-				<meta
-					name="6a97888e-site-verification"
-					content="90d979f1fff9fd54090d7391a9d668a0"
-				></meta>
 			</Helmet>
-			<div className="block md:hidden" style={{ transform: 'scale(0.7)' }}>
-				<CAdBanner />
+			<div
+				className="block md:hidden justify-center"
+				style={{ maxWidth: '300px', margin: 'auto' }}
+			>
+				<CAd
+					width="300"
+					height="250"
+					src="//a.adtng.com/get/10002799?ata=jorbinogales001"
+					name="spot_id_10002799"
+				/>
 			</div>
-			<div className="hidden md:block">
-				<CAdBanner />
+			<div
+				className="hidden md:block justify-center"
+				style={{ maxWidth: '728px', margin: 'auto' }}
+			>
+				<CAd
+					width="728"
+					height="90"
+					src="//a.adtng.com/get/10002801?ata=jorbinogales001"
+					name="spot_id_10002801"
+				/>
 			</div>
 			{page > 1 || search ? (
 				<div className="gap-5 p-5 mx-auto">
@@ -105,11 +116,27 @@ const Home: React.FC = () => {
 					search={search}
 				></CPagination>
 			</div>
-			<div className="block md:hidden" style={{ transform: 'scale(0.7)' }}>
-				<CAdBanner />
+			<div
+				className="block md:hidden justify-center"
+				style={{ maxWidth: '315px', margin: 'auto' }}
+			>
+				<CAd
+					width="315"
+					height="300"
+					src="//a.adtng.com/get/10002798?ata=jorbinogales001"
+					name="spot_id_10002798"
+				/>
 			</div>
-			<div className="hidden md:block">
-				<CAdBanner />
+			<div
+				className="hidden md:block justify-center"
+				style={{ maxWidth: '728px', margin: 'auto' }}
+			>
+				<CAd
+					width="728"
+					height="90"
+					src="//a.adtng.com/get/10002801?ata=jorbinogales001"
+					name="spot_id_10002801"
+				/>
 			</div>
 		</>
 	);
