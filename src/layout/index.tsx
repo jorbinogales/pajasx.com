@@ -42,6 +42,11 @@ const Layout: React.FC<any> = ({ children }) => {
 					content="https://www.pajasx.com/og-image.jpg"
 				/>
 				<meta name="google-adsense-account" content="ca-pub-9301893608040741" />
+				{/* Exo click  */}
+				<meta
+					name="6a97888e-site-verification"
+					content="90d979f1fff9fd54090d7391a9d668a0"
+				></meta>
 			</Helmet>
 			<div className="flex flex-col min-h-screen bg-stone-900">
 				{/* Navbar fijo */}
