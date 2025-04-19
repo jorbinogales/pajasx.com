@@ -58,6 +58,11 @@ const Home: React.FC = () => {
 					name="juicyads-site-verification"
 					content="28cd7ccf22cf0e282316ae57d22bd233"
 				/>
+				{/* Exo click  */}
+				<meta
+					name="6a97888e-site-verification"
+					content="90d979f1fff9fd54090d7391a9d668a0"
+				></meta>
 			</Helmet>
 			<div className="block md:hidden" style={{ transform: 'scale(0.7)' }}>
 				<CAdBanner />
